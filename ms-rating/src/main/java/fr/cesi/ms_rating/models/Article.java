@@ -1,4 +1,4 @@
-package fr.cesi.ms_author.models;
+package fr.cesi.ms_rating.models;
 
 import lombok.Getter;
 import lombok.Setter;
