@@ -1,5 +1,6 @@
 package fr.cesi.ms_article;
 
+import fr.cesi.ms_article.config.ArticleConfigParams;
 import fr.cesi.ms_article.entities.Article;
 import fr.cesi.ms_article.entities.Comment;
 import fr.cesi.ms_article.feign.AuthorRestClient;
@@ -11,6 +12,7 @@ import fr.cesi.ms_article.repository.CommentRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -20,6 +22,7 @@ import java.util.Date;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableConfigurationProperties(ArticleConfigParams.class)
 public class MsArticleApplication {
 
 	public static void main(String[] args) {

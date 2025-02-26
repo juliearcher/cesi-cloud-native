@@ -1,5 +1,6 @@
 package fr.cesi.ms_rating;
 
+import fr.cesi.ms_rating.config.RatingConfigParams;
 import fr.cesi.ms_rating.entities.Rating;
 import fr.cesi.ms_rating.feign.ArticleRestClient;
 import fr.cesi.ms_rating.feign.UserRestClient;
@@ -9,6 +10,7 @@ import fr.cesi.ms_rating.repository.RatingRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
@@ -18,6 +20,7 @@ import java.util.Random;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableConfigurationProperties(RatingConfigParams.class)
 public class MsRatingApplication {
 
 	public static void main(String[] args) {
