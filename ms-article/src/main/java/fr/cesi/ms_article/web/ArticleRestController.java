@@ -19,14 +19,15 @@ public class ArticleRestController  {
     private AuthorRestClient authorRestClient;
 
     @GetMapping("/articles")
-    public List<Article> getAllArticles() {
-        List<Article> articles = articleRepository.findAll();
+    public List<Article> getAllArticles(@RequestParam(required = false, name = "authorId") Long authorId) {
+        List<Article> articles = authorId == null ? articleRepository.findAll() : articleRepository.findByAuthorId(authorId);
         articles.forEach(article -> {
-            article.setAuthor(authorRestClient.findAuthorById(article.getAuthorId()));
-
+            System.out.println(article.getAuthorId());
+            if (authorId == null)
+                article.setAuthor(authorRestClient.findAuthorById(article.getAuthorId()));
             article.getComments().forEach(comment -> comment.setUser(userRestClient.findUserById(comment.getUserId())));
         });
-        return articleRepository.findAll();
+        return articles;
     }
 
     @GetMapping("/articles/{id}")

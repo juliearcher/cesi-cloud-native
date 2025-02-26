@@ -32,7 +32,7 @@ public class MsArticleApplication {
 							AuthorRestClient authorRestClient,
 							UserRestClient userRestClient, ArticleRepository articleRepository) {
 		return args -> {
-			Collection<Author> authors = authorRestClient.getAllAuthors().getContent();
+			Collection<Author> authors = authorRestClient.getAllAuthors();
 			Collection<User> users = userRestClient.getAllUsers().getContent();
 
 			authors.forEach(author -> {

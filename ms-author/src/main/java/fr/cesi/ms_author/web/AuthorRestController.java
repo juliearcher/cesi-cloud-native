@@ -2,19 +2,19 @@ package fr.cesi.ms_author.web;
 
 
 import fr.cesi.ms_author.entities.Author;
+import fr.cesi.ms_author.feign.ArticleRestClient;
 import fr.cesi.ms_author.repository.AuthorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-//@RestController
+@AllArgsConstructor
+@RestController
 public class AuthorRestController  {
     private AuthorRepository authorRepository;
-
-    public AuthorRestController(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+    private ArticleRestClient articleRestClient;
 
     @GetMapping("/authors")
     public List<Author> getAllAuthors() {
@@ -23,8 +23,11 @@ public class AuthorRestController  {
 
     @GetMapping("/authors/{id}")
     public Author getAuthor(@PathVariable Long id) {
-        Optional<Author> author = authorRepository.findById(id);
-        return author.orElse(null);
+        Author author = authorRepository.findById(id).orElse(null);
+        if (author != null) {
+            author.setArticles(articleRestClient.getAllArticlesofAuthor(id));
+        }
+        return author;
     }
 
     @PostMapping("/authors")
