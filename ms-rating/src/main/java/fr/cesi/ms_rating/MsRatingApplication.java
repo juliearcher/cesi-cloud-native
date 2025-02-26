@@ -32,7 +32,7 @@ public class MsRatingApplication {
 		return args -> {
 			Random r = new Random();
 			Collection<Article> articles = articleRestClient.getAllArticles();
-			Collection<User> users = userRestClient.getAllUsers().getContent();
+			Collection<User> users = userRestClient.getAllUsers();
 
 			articles.forEach(article -> {
 				System.out.println(article.getTitle() + " " + article.getId());

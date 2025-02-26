@@ -30,13 +30,12 @@ public class MsArticleApplication {
 	}
 
 	@Bean
-	CommandLineRunner start(ArticleRepository repo,
-							CommentRepository commentRepository,
+	CommandLineRunner start(CommentRepository commentRepository,
 							AuthorRestClient authorRestClient,
 							UserRestClient userRestClient, ArticleRepository articleRepository) {
 		return args -> {
 			Collection<Author> authors = authorRestClient.getAllAuthors();
-			Collection<User> users = userRestClient.getAllUsers().getContent();
+			Collection<User> users = userRestClient.getAllUsers();
 
 			authors.forEach(author -> {
 				System.out.println(author.getName() + " " + author.getId());
